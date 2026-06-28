@@ -1,0 +1,129 @@
+{
+  "generatedAt": "2026-06-28T14:59:47.392Z",
+  "cooldown": 60,
+  "models": [
+    {
+      "model": "claude-opus-4-8",
+      "conc": 5,
+      "total": 10,
+      "maxTok": 48,
+      "elapsed": 6.67,
+      "ok": 10,
+      "rps": 1.5,
+      "tpm": 28250,
+      "tokens": 3139,
+      "avgMs": 2611,
+      "p95Ms": 4191,
+      "errors": {}
+    },
+    {
+      "model": "claude-opus-4-7",
+      "conc": 5,
+      "total": 10,
+      "maxTok": 48,
+      "elapsed": 26.52,
+      "ok": 9,
+      "rps": 0.34,
+      "tpm": 6552,
+      "tokens": 2896,
+      "avgMs": 9403,
+      "p95Ms": 14927,
+      "errors": {
+        "http_429": 1
+      }
+    },
+    {
+      "model": "claude-opus-4-6",
+      "conc": 5,
+      "total": 10,
+      "maxTok": 48,
+      "elapsed": 19.9,
+      "ok": 10,
+      "rps": 0.5,
+      "tpm": 1679,
+      "tokens": 557,
+      "avgMs": 8453,
+      "p95Ms": 12929,
+      "errors": {}
+    }
+  ],
+  "ramp": {
+    "model": "claude-opus-4-8",
+    "steps": [
+      {
+        "model": "claude-opus-4-8",
+        "conc": 1,
+        "total": 3,
+        "maxTok": 48,
+        "elapsed": 5.55,
+        "ok": 3,
+        "rps": 0.54,
+        "tpm": 3634,
+        "tokens": 336,
+        "avgMs": 1849,
+        "p95Ms": 1935,
+        "errors": {}
+      },
+      {
+        "model": "claude-opus-4-8",
+        "conc": 2,
+        "total": 6,
+        "maxTok": 48,
+        "elapsed": 11.62,
+        "ok": 6,
+        "rps": 0.52,
+        "tpm": 5552,
+        "tokens": 1075,
+        "avgMs": 3403,
+        "p95Ms": 5400,
+        "errors": {}
+      },
+      {
+        "model": "claude-opus-4-8",
+        "conc": 4,
+        "total": 12,
+        "maxTok": 48,
+        "elapsed": 11.73,
+        "ok": 12,
+        "rps": 1.02,
+        "tpm": 7102,
+        "tokens": 1389,
+        "avgMs": 3675,
+        "p95Ms": 7917,
+        "errors": {}
+      },
+      {
+        "model": "claude-opus-4-8",
+        "conc": 8,
+        "total": 24,
+        "maxTok": 48,
+        "elapsed": 15.5,
+        "ok": 23,
+        "rps": 1.48,
+        "tpm": 12888,
+        "tokens": 3330,
+        "avgMs": 4374,
+        "p95Ms": 12230,
+        "errors": {
+          "http_429": 1
+        }
+      },
+      {
+        "model": "claude-opus-4-8",
+        "conc": 16,
+        "total": 48,
+        "maxTok": 48,
+        "elapsed": 6.39,
+        "ok": 21,
+        "rps": 3.29,
+        "tpm": 17868,
+        "tokens": 1902,
+        "avgMs": 3123,
+        "p95Ms": 4199,
+        "errors": {
+          "http_429": 27
+        }
+      }
+    ]
+  }
+}

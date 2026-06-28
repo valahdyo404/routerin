@@ -19,6 +19,7 @@
     "test": "node --test \"test/*.test.mjs\"",
     "coverage": "node --test --experimental-test-coverage \"test/*.test.mjs\"",
     "bench": "node scripts/bench.mjs",
+    "bench:report": "node scripts/report.mjs",
     "build": "bun build ./bin/routerin.js --compile --outfile routerin"
   },
   "keywords": [
