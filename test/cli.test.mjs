@@ -78,7 +78,27 @@ test("setup: every failure-reason branch", async () => {
   }
 });
 
-test("setup --yes without key", async () => {
+test("setup --yes reuses stored key when --key omitted", async () => {
+  store.saveConfig({ key: "sk-saved", model: "glm-5.2", targets: ["claude"] });
+  const { code } = await run(["setup", "--yes", "--targets", "pi"], { testConnection: okConn });
+  assert.equal(code, 0);
+  assert.equal(store.loadConfig().key, "sk-saved");
+});
+
+test("setup wizard receives stored key as default (no re-ask)", async () => {
+  store.saveConfig({ key: "sk-prev", model: "gpt-5.5", targets: ["claude"] });
+  let seen;
+  const fakeWizard = async (defaults) => {
+    seen = defaults;
+    return { key: defaults.key, model: defaults.model, targets: ["claude"] };
+  };
+  await run(["setup"], { testConnection: okConn, runWizard: fakeWizard });
+  assert.equal(seen.key, "sk-prev");
+  assert.equal(seen.model, "gpt-5.5");
+});
+
+test("setup --yes without key (and no stored key)", async () => {
+  rmSync(cfg.STORE_FILE, { force: true });
   const { code, out } = await run(["setup", "--yes"], { testConnection: okConn });
   assert.equal(code, 1);
   assert.ok(out.includes("--yes requires --key"));

@@ -14,8 +14,8 @@ Supports **Claude Code**, **opencode**, **Codex**, and **pi**.
 npx routerin
 ```
 
-3. Answer 3 questions:
-   - **paste your key**
+3. Answer the prompts:
+   - **paste your key** — skipped if a key is already saved (re-run never asks again)
    - **pick a model** — type a number, or just paste any model id (e.g. `glm-5.2`, `gpt-5.5`)
    - **pick your tools**
 

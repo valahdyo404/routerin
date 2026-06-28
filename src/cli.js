@@ -59,19 +59,21 @@ function parseTargets(value) {
 }
 
 async function cmdSetup(flags, deps) {
+  const existing = loadConfig() || {};
   let cfg;
   if (flags.yes) {
-    if (!flags.key) {
+    const key = flags.key || existing.key;
+    if (!key) {
       console.error("--yes requires --key");
       return 1;
     }
     cfg = {
-      key: flags.key,
-      model: flags.model || DEFAULT_MODEL,
+      key,
+      model: flags.model || existing.model || DEFAULT_MODEL,
       targets: flags.targets ? parseTargets(flags.targets) : ["claude"]
     };
   } else {
-    cfg = await deps.runWizard({ key: flags.key, model: flags.model });
+    cfg = await deps.runWizard({ key: flags.key || existing.key, model: flags.model || existing.model });
   }
 
   const done = applyTargets(cfg);
