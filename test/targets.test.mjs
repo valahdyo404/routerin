@@ -78,6 +78,8 @@ test("pi: writes provider + models", () => {
   const s = read(applyPi("sk-pi", "glm-5.2"));
   assert.equal(s.providers.agentrouter.apiKey, "sk-pi");
   assert.equal(s.providers.agentrouter.api, "anthropic-messages");
+  assert.equal(s.providers.agentrouter.baseUrl, cfg.BASE_URL);
+  assert.ok(!s.providers.agentrouter.baseUrl.endsWith("/v1"), "pi appends /v1/messages itself");
   assert.ok(s.providers.agentrouter.models.some((m) => m.id === "glm-5.2"));
   for (const m of s.providers.agentrouter.models) {
     assert.deepEqual(Object.keys(m.cost).sort(), ["cacheRead", "cacheWrite", "input", "output"]);
