@@ -74,14 +74,19 @@ test("codex: replaces prior routerin block, keeps user content", () => {
   assert.equal(toml.match(/model_provider = "agentrouter"/g).length, 1);
 });
 
-test("pi: writes provider + models", () => {
+test("pi: splits openai-completions (glm/gpt) and anthropic-messages (claude)", () => {
   const s = read(applyPi("sk-pi", "glm-5.2"));
-  assert.equal(s.providers.agentrouter.apiKey, "sk-pi");
-  assert.equal(s.providers.agentrouter.api, "anthropic-messages");
-  assert.equal(s.providers.agentrouter.baseUrl, cfg.BASE_URL);
-  assert.ok(!s.providers.agentrouter.baseUrl.endsWith("/v1"), "pi appends /v1/messages itself");
-  assert.ok(s.providers.agentrouter.models.some((m) => m.id === "glm-5.2"));
-  for (const m of s.providers.agentrouter.models) {
+  const oai = s.providers.agentrouter;
+  const ant = s.providers["agentrouter-claude"];
+  assert.equal(oai.api, "openai-completions");
+  assert.equal(oai.baseUrl, cfg.OPENAI_BASE_URL);
+  assert.ok(oai.models.some((m) => m.id === "glm-5.2"));
+  assert.ok(oai.models.some((m) => m.id === "gpt-5.5"));
+  assert.equal(ant.api, "anthropic-messages");
+  assert.equal(ant.baseUrl, cfg.BASE_URL);
+  assert.ok(!ant.baseUrl.endsWith("/v1"), "anthropic sdk appends /v1/messages itself");
+  assert.ok(ant.models.some((m) => m.id === "claude-opus-4-8"));
+  for (const m of [...oai.models, ...ant.models]) {
     assert.deepEqual(Object.keys(m.cost).sort(), ["cacheRead", "cacheWrite", "input", "output"]);
   }
 });

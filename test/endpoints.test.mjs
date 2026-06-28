@@ -25,8 +25,10 @@ const conventions = {
   opencodeOpenai: (base) => base + "/chat/completions",
   // codex wire_api "chat" appends /chat/completions to base_url
   codex: (base) => base + "/chat/completions",
-  // pi anthropic-messages appends /v1/messages to baseUrl
-  pi: (base) => base + "/v1/messages"
+  // pi anthropic-messages (anthropic sdk) appends /v1/messages to baseUrl
+  piAnthropic: (base) => base + "/v1/messages",
+  // pi openai-completions (openai sdk) appends /chat/completions to baseUrl
+  piOpenai: (base) => base + "/chat/completions"
 };
 
 for (const model of cfg.MODELS) {
@@ -61,8 +63,14 @@ for (const model of cfg.MODELS) {
 
   test(`pi endpoint+model: ${model}`, () => {
     const s = read(applyPi("sk", model));
-    const p = s.providers.agentrouter;
-    assert.equal(conventions.pi(p.baseUrl), ANTHROPIC);
-    assert.ok(p.models.some((m) => m.id === model));
+    if (isClaude(model)) {
+      const p = s.providers["agentrouter-claude"];
+      assert.equal(conventions.piAnthropic(p.baseUrl), ANTHROPIC);
+      assert.ok(p.models.some((m) => m.id === model));
+    } else {
+      const p = s.providers.agentrouter;
+      assert.equal(conventions.piOpenai(p.baseUrl), OPENAI);
+      assert.ok(p.models.some((m) => m.id === model));
+    }
   });
 }
