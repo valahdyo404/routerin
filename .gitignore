@@ -1,0 +1,7 @@
+.omc
+node_modules/
+*.log
+.DS_Store
+/routerin
+*.bun-build
+*.routerin.bak

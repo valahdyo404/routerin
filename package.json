@@ -1,0 +1,33 @@
+{
+  "name": "routerin",
+  "version": "0.1.0",
+  "description": "Lightweight plug-and-play setup to route Claude Code and other CLI coding tools through AgentRouter",
+  "type": "module",
+  "bin": {
+    "routerin": "./bin/routerin.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "coverage": "node --test --experimental-test-coverage \"test/*.test.mjs\"",
+    "build": "bun build ./bin/routerin.js --compile --outfile routerin"
+  },
+  "keywords": [
+    "agentrouter",
+    "claude-code",
+    "claude",
+    "glm",
+    "cli",
+    "proxy",
+    "router"
+  ],
+  "license": "MIT"
+}
