@@ -17,7 +17,7 @@ export function applyPi(key, model) {
       input: ["text"],
       contextWindow: m.ctx,
       maxTokens: m.out,
-      cost: { input: 0, output: 0 }
+      cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }
     }))
   };
 

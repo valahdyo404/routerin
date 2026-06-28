@@ -79,4 +79,7 @@ test("pi: writes provider + models", () => {
   assert.equal(s.providers.agentrouter.apiKey, "sk-pi");
   assert.equal(s.providers.agentrouter.api, "anthropic-messages");
   assert.ok(s.providers.agentrouter.models.some((m) => m.id === "glm-5.2"));
+  for (const m of s.providers.agentrouter.models) {
+    assert.deepEqual(Object.keys(m.cost).sort(), ["cacheRead", "cacheWrite", "input", "output"]);
+  }
 });
